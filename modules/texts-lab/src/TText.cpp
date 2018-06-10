@@ -103,7 +103,7 @@ PTText TText::getCopy()
 
 			if (currentLink != nullptr)
 			{
-				// Èäåì âíèç äî àòîìàðíîãî çâåíà
+				// Идем вниз до атомарного звена
 				St.push(currentLink);
 				currentLink = currentLink->GetDown();
 			}
@@ -157,7 +157,7 @@ int TText::GoDownLink(void)
 
 int TText::GoNextLink(void)
 {
-	if (pCurrent == nullptr) SetRetCode(TextError); // íàäî áðîñèòü èñêëþ÷åíèå
+	if (pCurrent == nullptr) SetRetCode(TextError); // надо бросить исключение
 	else if (pCurrent->pNext == nullptr ) SetRetCode(TextNoNext);
 	else
 	{
@@ -212,7 +212,6 @@ void TText::InsDownSection(string s)
 {
 	if (pCurrent != nullptr)
 	{
-		std::cout<<"im here!"<<std::endl;
 		PTTextLink tmpDown = pCurrent->pDown;
 		PTTextLink newLink = new TTextLink(const_cast<char *>(s.c_str()), nullptr, tmpDown);
 		pCurrent->pDown = newLink;
