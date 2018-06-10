@@ -166,9 +166,8 @@ TEST(TText_test, can_insert_down_line)
 TEST(TText_test, cant_insert_down_line_if_current_link_is_null)
 {
 	TText t1;
-	t1.InsDownLine("Hello");
-
-	EXPECT_EQ(t1.GetRetCode(), TextError);
+	
+	ASSERT_ANY_THROW(t1.InsDownLine("Hello"));
 }
 
 TEST(TText_test, can_insert_down_section)
