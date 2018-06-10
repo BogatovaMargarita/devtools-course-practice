@@ -4,11 +4,12 @@
 
 void test_text(TText *t)
 {
+	t->Reset();
 	t->SetLine("1.1. Полиномы");
 	t->InsDownSection("2. Структура");
 	t->InsDownLine("1. Определение");
 	t->InsNextLine("1.2. Тексты");
-	t->Reset();
+	
 	t->GoNextLink();
 	t->InsDownSection("2. Структура");
 	t->InsDownLine("1. Определение");
@@ -26,7 +27,7 @@ TEST(TTextLink_test, cant_initialize_memory_system_with_negative_size)
 	ASSERT_ANY_THROW(TTextLink::InitMemSystem(-12));
 }
 
-TEST(TTextLink_test, cant_call_twice_finction )
+TEST(TTextLink_test, cant_call_twice_finction)
 {
 	TTextLink::InitMemSystem();
 	ASSERT_ANY_THROW(TTextLink::InitMemSystem());
@@ -77,7 +78,7 @@ TEST(TText_test, can_set_line)
 
 	TText t1;
 	test_text(&t1);
-	ASSERT_NO_THROW( t1.SetLine("Hello"));
+	ASSERT_NO_THROW(t1.SetLine("Hello"));
 
 	TTextLink::DelMemSystem();
 }
@@ -88,7 +89,7 @@ TEST(TText_test, can_get_line)
 
 	TText t1;
 	test_text(&t1);
-	
+
 	ASSERT_NO_THROW(t1.GetLine());
 
 	TTextLink::DelMemSystem();
@@ -131,7 +132,7 @@ TEST(TText_test, can_set_string_by_using_data_type_Tstr)
 	TText t;
 	test_text(&t);
 	t.SetLine(s);
-	ASSERT_NO_THROW( t.SetLine(s));
+	ASSERT_NO_THROW(t.SetLine(s));
 
 	TTextLink::DelMemSystem();
 }
@@ -154,6 +155,7 @@ TEST(TText_test, can_insert_down_line)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 	t1.InsDownLine("Hello");
 	t1.GoDownLink();
@@ -178,6 +180,8 @@ TEST(TText_test, can_insert_down_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsDownLine("Hello");
 	t1.InsDownSection("World");
@@ -194,7 +198,7 @@ TEST(TText_test, can_insert_down_section)
 TEST(TText_test, cant_insert_down_section_if_current_link_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 	t1.InsDownSection("Hello");
 
@@ -207,6 +211,8 @@ TEST(TText_test, can_insert_next_line)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsNextLine("Hello");
 	t1.GoNextLink();
@@ -232,6 +238,8 @@ TEST(TText_test, can_insert_next_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsNextLine("Hello");
 	t1.InsNextSection("World");
@@ -248,12 +256,12 @@ TEST(TText_test, can_insert_next_section)
 TEST(TText_test, cant_insert_next_section_if_current_link_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 	t1.InsNextSection("Hello");
 
 	EXPECT_EQ(t1.GetRetCode(), TextError);
-	
+
 	TTextLink::DelMemSystem();
 }
 
@@ -262,6 +270,8 @@ TEST(TText_test, can_delete_down_line)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsDownLine("Hello");
 	t1.InsDownLine("World");
@@ -279,6 +289,8 @@ TEST(TText_test, down_line_cant_be_deleted_if_it_has_down_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsDownLine("Hello");
 	t1.InsDownLine("World");
@@ -297,6 +309,8 @@ TEST(TText_test, call_function_deletion_down_line_is_correct_if_text_dont_have_d
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 
 	t1.DelDownLine();
@@ -309,14 +323,14 @@ TEST(TText_test, call_function_deletion_down_line_is_correct_if_text_dont_have_d
 TEST(TText_test, call_function_deletion_down_line_is_correct_if_current_line_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 	t1.SetLine("begin");
 
 	t1.DelDownLine();
 
 	EXPECT_EQ(t1.GetRetCode(), TextError);
-	
+
 	TTextLink::DelMemSystem();
 }
 
@@ -325,6 +339,8 @@ TEST(TText_test, can_delete_down_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
+
 	t1.SetLine("begin");
 	t1.InsDownLine("Hello");
 	t1.InsDownSection("World");
@@ -342,6 +358,7 @@ TEST(TText_test, call_function_deletion_down_section_is_correct_if_text_dont_hav
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 
 	t1.DelDownSection();
@@ -354,14 +371,14 @@ TEST(TText_test, call_function_deletion_down_section_is_correct_if_text_dont_hav
 TEST(TText_test, call_function_deletion_down_section_is_correct_if_current_line_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 	t1.SetLine("begin");
 
 	t1.DelDownSection();
 
 	EXPECT_EQ(t1.GetRetCode(), TextError);
-	
+
 	TTextLink::DelMemSystem();
 }
 
@@ -370,6 +387,7 @@ TEST(TText_test, can_delete_next_line)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 	t1.InsNextLine("Hello");
 	t1.InsNextLine("World");
@@ -387,6 +405,7 @@ TEST(TText_test, next_line_cant_be_deleted_if_it_has_down_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 	t1.InsNextLine("Hello");
 	t1.GoNextLink();
@@ -406,6 +425,7 @@ TEST(TText_test, call_function_deletion_next_line_is_correct_if_text_dont_have_n
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 
 	t1.DelNextLine();
@@ -418,14 +438,14 @@ TEST(TText_test, call_function_deletion_next_line_is_correct_if_text_dont_have_n
 TEST(TText_test, call_function_deletion_next_line_is_correct_if_current_line_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 	t1.SetLine("begin");
 
 	t1.DelNextLine();
 
 	EXPECT_EQ(t1.GetRetCode(), TextError);
-	
+
 	TTextLink::DelMemSystem();
 }
 
@@ -434,6 +454,7 @@ TEST(TText_test, can_delete_next_section)
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 	t1.InsNextLine("Hello");
 	t1.GoNextLink();
@@ -454,6 +475,7 @@ TEST(TText_test, call_function_deletion_next_section_is_correct_if_text_dont_hav
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 	t1.SetLine("begin");
 
 	t1.DelNextSection();
@@ -490,14 +512,6 @@ TEST(TText_test, can_go_first_link)
 	TTextLink::DelMemSystem();
 }
 
-TEST(TText_test, cant_go_first_link_if_text_dont_have_memory)
-{
-	TTextLink::InitMemSystem();
-	TText t1;
-	EXPECT_EQ(t1.GoFirstLink(), TextNoMem);
-	TTextLink::DelMemSystem();
-}
-
 TEST(TText_test, can_go_down_link)
 {
 	TTextLink::InitMemSystem();
@@ -515,6 +529,7 @@ TEST(TText_test, call_function_GoDownLink_is_correct_if_current_link_dont_have_d
 	TTextLink::InitMemSystem();
 
 	TText t1;
+	t1.Reset();
 
 	EXPECT_EQ(t1.GoDownLink(), TextNoDown);
 
@@ -524,11 +539,11 @@ TEST(TText_test, call_function_GoDownLink_is_correct_if_current_link_dont_have_d
 TEST(TText_test, call_function_GoDownLink_is_correct_if_current_line_is_null)
 {
 	TTextLink::InitMemSystem();
-	
+
 	TText t1;
 
 	EXPECT_EQ(t1.GoDownLink(), TextError);
-	
+
 	TTextLink::DelMemSystem();
 }
 
@@ -538,7 +553,6 @@ TEST(TText_test, can_go_next_link)
 
 	TText t1;
 	test_text(&t1);
-	t1.Reset();
 
 	EXPECT_EQ(t1.GoNextLink(), TextOk);
 
@@ -550,7 +564,7 @@ TEST(TText_test, call_function_GoNextLink_is_correct_if_current_link_dont_have_n
 	TTextLink::InitMemSystem();
 
 	TText t1;
-
+	t1.Reset();
 	EXPECT_EQ(t1.GoNextLink(), TextNoNext);
 
 	TTextLink::DelMemSystem();
