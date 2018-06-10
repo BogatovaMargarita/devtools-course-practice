@@ -199,14 +199,13 @@ void TText::SetLine(string s)
 
 void TText::InsDownLine(string s)
 {
-	if (pCurrent == nullptr) throw std::runtime_error("Current element is null");
-	else
+	if (pCurrent != nullptr)
 	{
-		std::cout<<"im here!"<<std::endl;
 		PTTextLink tmpDown = pCurrent->pDown;
 		PTTextLink newLink = new TTextLink(const_cast<char *>(s.c_str()), tmpDown);
 		pCurrent->pDown = newLink;
 	}
+	else SetRetCode(TextError);
 }
 
 void TText::InsDownSection(string s)
