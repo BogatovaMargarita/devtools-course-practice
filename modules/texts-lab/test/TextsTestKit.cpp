@@ -7,14 +7,14 @@
 
 void test_text(TText *t)
 {
-	t->SetLine("1.1. Ïîëèíîìû");
-	t->InsDownSection("2. Ñòðóêòóðà");
-	t->InsDownLine("1. Îïðåäåëåíèå");
-	t->InsNextLine("1.2. Òåêñòû");
+	t->SetLine("1.1. ÃÃ®Ã«Ã¨Ã­Ã®Ã¬Ã»");
+	t->InsDownSection("2. Ã‘Ã²Ã°Ã³ÃªÃ²Ã³Ã°Ã ");
+	t->InsDownLine("1. ÃŽÃ¯Ã°Ã¥Ã¤Ã¥Ã«Ã¥Ã­Ã¨Ã¥");
+	t->InsNextLine("1.2. Ã’Ã¥ÃªÃ±Ã²Ã»");
 	t->Reset();
 	t->GoNextLink();
-	t->InsDownSection("2. Ñòðóêòóðà");
-	t->InsDownLine("1. Îïðåäåëåíèå");
+	t->InsDownSection("2. Ã‘Ã²Ã°Ã³ÃªÃ²Ã³Ã°Ã ");
+	t->InsDownLine("1. ÃŽÃ¯Ã°Ã¥Ã¤Ã¥Ã«Ã¥Ã­Ã¨Ã¥");
 	t->Reset();
 }
 
@@ -38,7 +38,7 @@ TEST(TTextLink_test, cant_call_twice_finction)
 
 TEST(TTextLink_test, can_create_text_link)
 {
-	char str[TEXT_LINE_LENGTH - 10];
+	char str[TEXT_LINE_LENGTH - 10] = {0};
 
 	for (int i = 0; i < TEXT_LINE_LENGTH - 10; i++) str[i] = 'u';
 	str[TEXT_LINE_LENGTH - 11] = '\0';
@@ -52,7 +52,7 @@ TEST(TTextLink_test, can_create_zero_text_link)
 
 TEST(TTextLink_test, cant_create_text_link_with_longer_string)
 {
-	char str[TEXT_LINE_LENGTH + 10];
+	char str[TEXT_LINE_LENGTH + 10] = {0}
 
 	for (int i = 0; i < TEXT_LINE_LENGTH + 10; i++) str[i] = 'u';
 	str[TEXT_LINE_LENGTH + 9] = '\0';
