@@ -465,12 +465,14 @@ TEST(TText_test, call_function_deletion_next_section_is_correct_if_text_dont_hav
 
 TEST(TText_test, call_function_deletion_next_section_is_correct_if_current_line_is_null)
 {
+	TTextLink::InitMemSystem();
 	TText t1;
 	t1.SetLine("begin");
 
 	t1.DelNextSection();
 
 	EXPECT_EQ(t1.GetRetCode(), TextError);
+	TTextLink::DelMemSystem();
 }
 
 TEST(TText_test, can_go_first_link)
