@@ -103,7 +103,7 @@ PTText TText::getCopy()
 
 			if (currentLink != nullptr)
 			{
-				// Èäåì âíèç äî àòîìàðíîãî çâåíà
+				// ÃˆÃ¤Ã¥Ã¬ Ã¢Ã­Ã¨Ã§ Ã¤Ã® Ã Ã²Ã®Ã¬Ã Ã°Ã­Ã®Ã£Ã® Ã§Ã¢Ã¥Ã­Ã 
 				St.push(currentLink);
 				currentLink = currentLink->GetDown();
 			}
@@ -157,7 +157,7 @@ int TText::GoDownLink(void)
 
 int TText::GoNextLink(void)
 {
-	if (pCurrent == nullptr) SetRetCode(TextError); // íàäî áðîñèòü èñêëþ÷åíèå
+	if (pCurrent == nullptr) SetRetCode(TextError); // Ã­Ã Ã¤Ã® Ã¡Ã°Ã®Ã±Ã¨Ã²Ã¼ Ã¨Ã±ÃªÃ«Ã¾Ã·Ã¥Ã­Ã¨Ã¥
 	else if (pCurrent->pNext == nullptr ) SetRetCode(TextNoNext);
 	else
 	{
@@ -212,6 +212,7 @@ void TText::InsDownSection(string s)
 {
 	if (pCurrent != nullptr)
 	{
+		std::cout<<"im here!"<<std::endl;
 		PTTextLink tmpDown = pCurrent->pDown;
 		PTTextLink newLink = new TTextLink(const_cast<char *>(s.c_str()), nullptr, tmpDown);
 		pCurrent->pDown = newLink;
