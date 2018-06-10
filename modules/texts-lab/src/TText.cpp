@@ -1,6 +1,6 @@
 #include "include/TText.h"
 #include <fstream>  
-#include <string>
+
 PTTextLink TText::GetFirstAtom(PTTextLink pl)
 {
 	PTTextLink tmp = pl;
@@ -199,7 +199,7 @@ void TText::SetLine(string s)
 
 void TText::InsDownLine(string s)
 {
-	if (pCurrent == nullptr) SetRetCode(TextError);
+	if (pCurrent == nullptr) throw std::runtime_error("Current element is null");
 	else
 	{
 		std::cout<<"im here!"<<std::endl;
