@@ -52,9 +52,11 @@ void TText::PrintText(PTTextLink ptl)
 
 TText::TText(PTTextLink pl)
 {
-        if (pl == nullptr)
-		pFirst = pCurrent =  new TTextLink;
-	else pFirst = pCurrent = pl;
+	if (pl == nullptr)
+		pFirst =  new TTextLink;
+	else pFirst = pl;
+
+	pCurrent = nullptr;
 }
 
 TText::TText(const TText & txt)
