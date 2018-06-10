@@ -36,28 +36,9 @@ TEST(TTextLink_test, cant_call_twice_finction)
 	TTextLink::DelMemSystem();
 }
 
-TEST(TTextLink_test, can_create_text_link)
-{
-	char str[TEXT_LINE_LENGTH - 10] = {0};
-
-	for (int i = 0; i < TEXT_LINE_LENGTH - 10; i++) str[i] = 'u';
-	str[TEXT_LINE_LENGTH - 11] = '\0';
-	ASSERT_NO_THROW(TTextLink(str));
-}
-
 TEST(TTextLink_test, can_create_zero_text_link)
 {
 	ASSERT_NO_THROW(TTextLink());
-}
-
-TEST(TTextLink_test, cant_create_text_link_with_longer_string)
-{
-	char str[TEXT_LINE_LENGTH + 10] = {0}
-
-	for (int i = 0; i < TEXT_LINE_LENGTH + 10; i++) str[i] = 'u';
-	str[TEXT_LINE_LENGTH + 9] = '\0';
-
-	ASSERT_ANY_THROW(TTextLink((std::string)str));
 }
 
 TEST(TText_test, can_create_text)
