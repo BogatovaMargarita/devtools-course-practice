@@ -1,6 +1,6 @@
 #include "include/TText.h"
 #include <fstream>  
-
+#include <string>
 PTTextLink TText::GetFirstAtom(PTTextLink pl)
 {
 	PTTextLink tmp = pl;
@@ -199,14 +199,19 @@ void TText::SetLine(string s)
 
 void TText::InsDownLine(string s)
 {
-	if (pCurrent != nullptr)
+		if(pCurrent == nullptr)
+		SetRetCode(TextError);
+	else if(s.length() > TextLineLength)
+		SetRetCode(TooLongString);
+	else
 	{
-		std::cout<<"im here!"<<std::endl;
-		PTTextLink tmpDown = pCurrent->pDown;
-		PTTextLink newLink = new TTextLink(const_cast<char *>(s.c_str()), tmpDown);
-		pCurrent->pDown = newLink;
+		PTTextLink pd = pCurrent->pDown;
+		PTTextLink pl = new TTextLink("",pd,nullptr);
+		strncpy_s(pl->Str, s.c_str(), TextLineLength);
+		pl->Str[TextLineLength - 1] = '\0';
+		pCurrent->pDown = pl;
+		SetRetCode(TextOk);
 	}
-	else SetRetCode(TextError);
 }
 
 void TText::InsDownSection(string s)
