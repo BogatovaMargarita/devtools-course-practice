@@ -199,18 +199,13 @@ void TText::SetLine(string s)
 
 void TText::InsDownLine(string s)
 {
-		if(pCurrent == nullptr)
-		SetRetCode(TextError);
-	else if(s.length() > TextLineLength)
-		SetRetCode(TooLongString);
+	if (pCurrent == nullptr) SetRetCode(TextError);
 	else
 	{
-		PTTextLink pd = pCurrent->pDown;
-		PTTextLink pl = new TTextLink("",pd,nullptr);
-		strncpy_s(pl->Str, s.c_str(), TextLineLength);
-		pl->Str[TextLineLength - 1] = '\0';
-		pCurrent->pDown = pl;
-		SetRetCode(TextOk);
+		std::cout<<"im here!"<<std::endl;
+		PTTextLink tmpDown = pCurrent->pDown;
+		PTTextLink newLink = new TTextLink(const_cast<char *>(s.c_str()), tmpDown);
+		pCurrent->pDown = newLink;
 	}
 }
 
