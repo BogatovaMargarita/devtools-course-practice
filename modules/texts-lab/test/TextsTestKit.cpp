@@ -16,6 +16,7 @@ void test_text(TText *t)
 	t->Reset();
 }
 
+
 TEST(TTextLink_test, can_initialize_memory_system)
 {
 	ASSERT_NO_THROW(TTextLink::InitMemSystem());
@@ -34,11 +35,36 @@ TEST(TTextLink_test, cant_call_twice_finction)
 	TTextLink::DelMemSystem();
 }
 
-
-
 TEST(TTextLink_test, can_create_zero_text_link)
 {
 	ASSERT_NO_THROW(TTextLink());
+}
+
+TEST(TTextLink_test, can_create_text_link)
+{
+	TTextLink::InitMemSystem();
+
+	char str[TEXT_LINE_LENGTH - 10];
+
+	for (int i = 0; i < TEXT_LINE_LENGTH - 10; i++) str[i] = 'u';
+	str[TEXT_LINE_LENGTH - 11] = '\0';
+	ASSERT_NO_THROW(TTextLink(str));
+	
+	TTextLink::DelMemSystem();
+}
+
+TEST(TTextLink_test, cant_create_text_link_with_longer_string)
+{
+	TTextLink::InitMemSystem();
+
+	char str[TEXT_LINE_LENGTH + 10];
+
+	for (int i = 0; i < TEXT_LINE_LENGTH + 10; i++) str[i] = 'u';
+	str[TEXT_LINE_LENGTH + 9] = '\0';
+
+	ASSERT_ANY_THROW(TTextLink((std::string)str));
+	
+	TTextLink::DelMemSystem();
 }
 
 TEST(TText_test, can_create_text)
