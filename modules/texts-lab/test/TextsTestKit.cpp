@@ -44,10 +44,11 @@ TEST(TTextLink_test, can_create_text_link)
 {
 	TTextLink::InitMemSystem();
 
-	char str[TEXT_LINE_LENGTH - 10];
+	char str[TEXT_LINE_LENGTH - 10] = {0};
 
 	for (int i = 0; i < TEXT_LINE_LENGTH - 10; i++) str[i] = 'u';
 	str[TEXT_LINE_LENGTH - 11] = '\0';
+	std::cout<<str<<std::endl;
 	ASSERT_NO_THROW(TTextLink(str));
 	
 	TTextLink::DelMemSystem();
@@ -57,11 +58,11 @@ TEST(TTextLink_test, cant_create_text_link_with_longer_string)
 {
 	TTextLink::InitMemSystem();
 
-	char str[TEXT_LINE_LENGTH + 10];
+	char str[TEXT_LINE_LENGTH + 10] ={0};
 
 	for (int i = 0; i < TEXT_LINE_LENGTH + 10; i++) str[i] = 'u';
 	str[TEXT_LINE_LENGTH + 9] = '\0';
-
+	std::cout<<str<<std::endl;
 	ASSERT_ANY_THROW(TTextLink((std::string)str));
 	
 	TTextLink::DelMemSystem();
